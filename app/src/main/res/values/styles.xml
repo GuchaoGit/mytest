@@ -1,0 +1,20 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!--隐藏ActionBar和标题-->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="NavMenuItem" parent="TextAppearance.AppCompat.Menu">
+        <item name="android:maxLines">2</item>
+        <item name="android:ems">50</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+</resources>
