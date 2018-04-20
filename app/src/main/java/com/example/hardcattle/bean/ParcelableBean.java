@@ -7,7 +7,7 @@ import com.google.gson.Gson;
 
 /**
  * Created by guc on 2018/4/18.
- * 描述：
+ * 描述：序列化bean测试
  */
 public class ParcelableBean implements Parcelable {
     private boolean isRight;

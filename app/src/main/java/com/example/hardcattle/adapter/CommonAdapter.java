@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import java.util.List;
 
 /**
- * Created by hardcattle on 2018/3/28.
+ * Created by guc on 2018/3/28.
  * 描述：
  */
 

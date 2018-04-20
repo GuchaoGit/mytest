@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by hardcattle on 2018/3/28.
+ * Created by guc on 2018/3/28.
  * 描述：通用ViewHolder类
  */
 
