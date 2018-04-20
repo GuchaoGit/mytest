@@ -8,3 +8,5 @@
 4.Rxjava + Retrofit 2.0 测试
 5.ImagePicker选择图片功能
 6.Refreshlayout 下拉刷新，上拉加载更多控件
+7.动态权限申请----compile 'com.mylhyl:acp:1.1.7'
+8.常用工具类 -----compile 'com.blankj:utilcode:1.13.4'
