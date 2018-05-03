@@ -26,7 +26,11 @@ import com.mylhyl.acp.AcpListener;
 import com.mylhyl.acp.AcpOptions;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private AutoCompleteTextView tvShow;
@@ -35,7 +39,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tvSlideMenu, tvAppName ,tvImageTest,testRefreshLayout;
     private DrawerLayout mDrawLayout;
     private NavigationView mNaviView;
-    private Button btnGsonTest;
+    private Button btnGsonTest,btnSortTest,btnScrollTableTest;
+    private List<ParcelableBean> userBeanList = new ArrayList<ParcelableBean>(){
+        {
+            add(new ParcelableBean("guc",24));
+            add(new ParcelableBean("cxl",22));
+            add(new ParcelableBean("gff",28));
+            add(new ParcelableBean("cyw",21));
+        }
+    };
 
     private List<String> arrayList = new ArrayList<String>() {
         {
@@ -111,6 +123,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvImageTest = view.findViewById(R.id.tv_imagepicker_test);
         testRefreshLayout = view.findViewById(R.id.tv_refresh_layout_test);
         btnGsonTest = findViewById(R.id.btn_gson_test);
+        btnSortTest = findViewById(R.id.btn_sort_test);
+        btnScrollTableTest = findViewById(R.id.btn_scroll_test);
 
     }
 
@@ -120,6 +134,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvImageTest.setOnClickListener(this);
         btnGsonTest.setOnClickListener(this);
         testRefreshLayout.setOnClickListener(this);
+        btnSortTest.setOnClickListener(this);
+        btnScrollTableTest.setOnClickListener(this);
     }
 
     /**
@@ -158,6 +174,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.tv_refresh_layout_test:
                 startActivity(new Intent(this,TestRefreshLayout.class));
                 mDrawLayout.closeDrawer(mNaviView);
+                break;
+            case R.id.btn_sort_test://排序测试
+                testSort();
+                break;
+            case R.id.btn_scroll_test:
+                startActivity(new Intent(this,ScrollTableLayoutTest.class));
                 break;
         }
     }
@@ -203,5 +225,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bean.setName("张三");
         bean.setCreateTime(1112532145);
         btnGsonTest.setText(bean.toString());
+        Map<String,String> map = new HashMap<>();
+        map.put("name","张珊");
+        map.put("age","20");
+        map.put("sex","女");
+        Set<Map.Entry<String,String>> mapSet = map.entrySet();
+        for (Map.Entry<String,String> entry:mapSet){
+            Log.e("guc----",entry.getKey()+entry.getValue());
+        }
+    }
+
+    /**
+     * 测试排序
+     */
+    private void testSort(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("原始顺序：\n");
+        for (ParcelableBean bean:userBeanList){
+            sb.append(bean.getName()+ bean.getAge()+"\n");
+        }
+        Collections.sort(userBeanList);
+        sb.append("排序后：\n");
+        for (ParcelableBean bean:userBeanList){
+            sb.append(bean.getName()+ bean.getAge()+"\n");
+        }
+        btnSortTest.setText(sb.toString());
     }
 }

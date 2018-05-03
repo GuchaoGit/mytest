@@ -10,6 +10,13 @@ public class UserBean implements Serializable{
     private String id;
     private String name;
     private String number;
+    public UserBean(){
+
+    }
+    public UserBean(String name, String number) {
+        this.name = name;
+        this.number = number;
+    }
 
     public String getId() {
         return id;

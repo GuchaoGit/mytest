@@ -2,26 +2,34 @@ package com.example.hardcattle.bean;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import com.google.gson.Gson;
+
+import java.util.Comparator;
 
 /**
  * Created by guc on 2018/4/18.
  * 描述：序列化bean测试
  */
-public class ParcelableBean implements Parcelable {
+public class ParcelableBean implements Parcelable,Comparable<ParcelableBean>{
     private boolean isRight;
     private String name;
     private int age;
     private long createTime;
+
+    public ParcelableBean(){
+    }
+    public ParcelableBean(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
 
     @Override
     public int describeContents() {
         return 0;
     }
 
-    public ParcelableBean(){
-    }
     public static final Creator<ParcelableBean> CREATOR = new Creator<ParcelableBean>() {
         @Override
         public ParcelableBean createFromParcel(Parcel source) {
@@ -82,5 +90,16 @@ public class ParcelableBean implements Parcelable {
     public String toString() {
         Gson gson = new Gson();
         return  gson.toJson(this);
+    }
+
+    @Override
+    public int compareTo(@NonNull ParcelableBean o) {
+        //根据年龄和姓名排序
+        int flag = this.age - o.age;
+        if (flag == 0){
+            return this.name.compareTo(o.name);
+        }else {
+            return flag;
+        }
     }
 }
