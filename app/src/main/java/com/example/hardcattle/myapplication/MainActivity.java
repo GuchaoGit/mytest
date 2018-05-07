@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.hardcattle.Utils.BinnerImageLoader;
 import com.example.hardcattle.bean.ParcelableBean;
 import com.example.hardcattle.bean.UserBean;
 import com.example.hardcattle.widget.autocompleteview.AutoCompleteView;
@@ -25,6 +26,9 @@ import com.google.gson.GsonBuilder;
 import com.mylhyl.acp.Acp;
 import com.mylhyl.acp.AcpListener;
 import com.mylhyl.acp.AcpOptions;
+import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
+import com.youth.banner.Transformer;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private DrawerLayout mDrawLayout;
     private NavigationView mNaviView;
     private Button btnGsonTest,btnSortTest,btnScrollTableTest;
+    private Banner mBanner;
     private List<ParcelableBean> userBeanList = new ArrayList<ParcelableBean>(){
         {
             add(new ParcelableBean("guc",24));
@@ -94,6 +99,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    private void initBanner(){
+        List<String> titles = new ArrayList(){
+            {
+                add("我们准备玩一场大的");
+                add("夏日美丽专属");
+                add("量身定做");
+            }
+        };
+        List<String> images = new ArrayList(){
+            {
+                add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1525674275984&di=3dc2ddc98dccfa995ba84db39c87ea50&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01f1cf554501b30000019ae9e37050.jpg%402o.jpg");
+                add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1525674276933&di=d77225c265896ec0176e3bc583544ff5&imgtype=jpg&src=http%3A%2F%2Fimg2.imgtn.bdimg.com%2Fit%2Fu%3D6895722%2C610391116%26fm%3D214%26gp%3D0.jpg");
+                add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1525674275984&di=8b1cdfc9f6efe4a70f9d53c33441c128&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F13%2F18%2F79%2F36s58PICHwi_1024.jpg");
+            }
+        };
+        //设置banner样式
+        mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
+        //设置图片加载器
+        mBanner.setImageLoader(new BinnerImageLoader());
+        //设置图片集合
+        mBanner.setImages(images);
+        //设置banner动画效果
+        mBanner.setBannerAnimation(Transformer.DepthPage);
+        //设置标题集合（当banner样式有显示title时）
+        mBanner.setBannerTitles(titles);
+        //设置自动轮播，默认为true
+        mBanner.isAutoPlay(true);
+        //设置轮播时间
+        mBanner.setDelayTime(5000);
+        //设置指示器位置（当banner模式中有指示器时）
+        mBanner.setIndicatorGravity(BannerConfig.RIGHT);
+        //banner设置方法全部调用完毕时最后调用
+        mBanner.start();
+    }
     private void findView() {
         tvShow = findViewById(R.id.auto_complete_tv);
         autoCompleteView = findViewById(R.id.acv);
@@ -102,6 +141,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mDrawLayout = findViewById(R.id.drawer_layout);
         mNaviView = findViewById(R.id.nav_view);
 
+        mBanner = findViewById(R.id.banner);
         View view = mNaviView.getHeaderView(0);//获取侧边栏View
         tvAppName = view.findViewById(R.id.tv_app_name);
         tvImageTest = view.findViewById(R.id.tv_imagepicker_test);
@@ -175,13 +215,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Acp.getInstance(this).request(new AcpOptions.Builder()
                         .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE
                                 , Manifest.permission.READ_EXTERNAL_STORAGE
+                                ,Manifest.permission.INTERNET
                         )
                         .build(),
                 new AcpListener() {
                     @Override
                     public void onGranted() {
                         Toast.makeText(MainActivity.this, "成功获取权限", Toast.LENGTH_LONG);
-
+                        initBanner();
                     }
 
                     @Override
