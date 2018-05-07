@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.hardcattle.bean.ParcelableBean;
 import com.example.hardcattle.bean.UserBean;
+import com.example.hardcattle.widget.autocompleteview.AutoCompleteView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mylhyl.acp.Acp;
@@ -65,7 +66,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
     };
-    private AutoCompleteTvAdapter<String> autoCompleteTvAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,22 +74,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setStatusBar();
         findView();
         initListener();
-        autoCompleteTvAdapter = new AutoCompleteTvAdapter<>(this, R.layout.item_auto_complete_view, arrayList);
-        tvShow.setAdapter(autoCompleteTvAdapter);
-        tvShow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), "点击" + position + autoCompleteTvAdapter.getItem(position), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        autoCompleteView.setData(arrayList);
-        autoCompleteView.setOnSelectedListenner(new AutoCompleteView.OnSelectedListenner() {
-            @Override
-            public void onSelected(String selectedData) {
-
-            }
-        });
         testStringArray();
         checkPermissions();
     }
@@ -112,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void findView() {
         tvShow = findViewById(R.id.auto_complete_tv);
-        autoCompleteView = findViewById(R.id.cv);
+        autoCompleteView = findViewById(R.id.acv);
         tvSlideMenu = findViewById(R.id.tv_slide_menu);
 
         mDrawLayout = findViewById(R.id.drawer_layout);
@@ -125,6 +109,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnGsonTest = findViewById(R.id.btn_gson_test);
         btnSortTest = findViewById(R.id.btn_sort_test);
         btnScrollTableTest = findViewById(R.id.btn_scroll_test);
+        autoCompleteView.setData("zylb");
 
     }
 

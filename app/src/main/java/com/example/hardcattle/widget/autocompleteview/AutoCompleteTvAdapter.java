@@ -1,4 +1,4 @@
-package com.example.hardcattle.myapplication;
+package com.example.hardcattle.widget.autocompleteview;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,27 +9,29 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
+import com.example.hardcattle.bean.BeanKeyValue;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * 带提示的TextView数据适配器（自定义过滤器）
- * @param <T>
+ * @param
  */
-public class AutoCompleteTvAdapter<T> extends BaseAdapter implements Filterable {
-    private List<T> mOriginalValues;
-    private List<T> mObject;
+public class AutoCompleteTvAdapter extends BaseAdapter implements Filterable {
+    private List<BeanKeyValue> mOriginalValues;
+    private List<BeanKeyValue> mObject;
     private final Object mLock = new Object();
     private int mResouce;
     private MyFilter myFilter = null;
     private LayoutInflater inflater;
 
-    public AutoCompleteTvAdapter(Context context, int TextViewResouceId, List<T> objects)
+    public AutoCompleteTvAdapter(Context context, int TextViewResouceId, List<BeanKeyValue> objects)
     {
         init(context,TextViewResouceId,objects);
     }
 
-    private void init(Context context, int textViewResouceId, List<T> objects)
+    private void init(Context context, int textViewResouceId, List<BeanKeyValue> objects)
     {
         inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mObject = objects;
@@ -43,7 +45,7 @@ public class AutoCompleteTvAdapter<T> extends BaseAdapter implements Filterable 
     }
 
     @Override
-    public T getItem(int position) {
+    public BeanKeyValue getItem(int position) {
         return mObject.get(position);
     }
 
@@ -64,15 +66,8 @@ public class AutoCompleteTvAdapter<T> extends BaseAdapter implements Filterable 
             convertView = inflater.inflate(mResouce, parent,false);
         }
         TextView tv = (TextView)convertView;
-        T item = getItem(position);
-        if(item instanceof CharSequence)
-        {
-            tv.setText((CharSequence)item);
-        }
-        else
-        {
-            tv.setText(item.toString());
-        }
+        BeanKeyValue item = getItem(position);
+        tv.setText(item.value+"-"+item.key);
         return tv;
     }
 
@@ -92,16 +87,16 @@ public class AutoCompleteTvAdapter<T> extends BaseAdapter implements Filterable 
             if(mOriginalValues == null)
             {
                 synchronized (mLock) {
-                    mOriginalValues = new ArrayList<T>(mObject);
+                    mOriginalValues = new ArrayList<BeanKeyValue>(mObject);
                 }
             }
 
             int count = mOriginalValues.size();
-            ArrayList<T> values = new ArrayList<T>();
+            ArrayList<BeanKeyValue> values = new ArrayList<BeanKeyValue>();
             for(int i = 0;i < count;i++)
             {
-                T value = mOriginalValues.get(i);
-                String valueText = value.toString();
+                BeanKeyValue value = mOriginalValues.get(i);
+                String valueText = value.key+value.value;
                 //自定义匹配规则
                 if (constraint == null ||constraint.toString().trim().equals("")){
                     values.add(value);
@@ -126,7 +121,7 @@ public class AutoCompleteTvAdapter<T> extends BaseAdapter implements Filterable 
                                       FilterResults results) {
             //把搜索结果赋值给mObject这样每次输入字符串的时候就不必
             //从所有的字符串中查找，从而提高了效率
-            mObject = (List<T>)results.values;
+            mObject = (List<BeanKeyValue>)results.values;
             if(results.count > 0)
             {
                 notifyDataSetChanged();

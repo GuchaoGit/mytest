@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<AutoCompleteTextView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.hardcattle.widget.autocompleteview.MyAutoCompleteTextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/auto_complete_tv_root"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:completionThreshold="1">
+    android:completionThreshold="1"
+    android:background="@drawable/spinner_selector"
+    android:paddingLeft="10dp"
+    android:textSize="14sp"
+    >
 
-</AutoCompleteTextView>
+</com.example.hardcattle.widget.autocompleteview.MyAutoCompleteTextView>
