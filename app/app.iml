@@ -115,6 +115,7 @@
     <orderEntry type="library" name="Gradle: com.squareup.okhttp3:okhttp:3.3.1@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-compat-27.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-v4-27.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: com.youth.banner:banner-1.4.10" level="project" />
     <orderEntry type="library" name="Gradle: com.mylhyl:acp-1.1.7" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:recyclerview-v7-27.0.1" level="project" />
     <orderEntry type="library" name="Gradle: android.arch.core:common:1.0.0@jar" level="project" />
