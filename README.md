@@ -10,3 +10,4 @@
 #*6.Refreshlayout 下拉刷新，上拉加载更多控件<br/>
 #*7.动态权限申请----compile 'com.mylhyl:acp:1.1.7'<br/>
 #*8.常用工具类 -----compile 'com.blankj:utilcode:1.13.4'<br/>
+#*9.SwipeCardView 类似探探 刷脸找人控件
