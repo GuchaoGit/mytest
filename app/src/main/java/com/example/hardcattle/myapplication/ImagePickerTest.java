@@ -167,8 +167,6 @@ public class ImagePickerTest extends AppCompatActivity implements View.OnClickLi
             images.clear();
             images.add(item);
             imagePicker.getImageLoader().displayImage(ImagePickerTest.this, path, ivShow, 800, 800);
-
-
         }
     }
 }
