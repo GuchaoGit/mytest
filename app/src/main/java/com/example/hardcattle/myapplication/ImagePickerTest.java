@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.example.hardcattle.Utils.GlideImageLoader;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
@@ -32,7 +31,7 @@ import static com.lzy.imagepicker.ImagePicker.REQUEST_CODE_PREVIEW;
  */
 
 public class ImagePickerTest extends AppCompatActivity implements View.OnClickListener {
-    private Button btnGetPic;
+    private Button btnGetPic, btnTakePic;
     private ImageView ivShow;
     public static final int REQUEST_CODE_SELECT = 100;
     private ImagePicker imagePicker;
@@ -49,6 +48,7 @@ public class ImagePickerTest extends AppCompatActivity implements View.OnClickLi
 
     private void init() {
         btnGetPic = findViewById(R.id.btn_imagepickertest);
+        btnTakePic = findViewById(R.id.btn_imagepickertest_take_pic);
         ivShow = findViewById(R.id.iv_imagepickertest);
         imagePicker = ImagePicker.getInstance();
         imagePicker.setImageLoader(new GlideImageLoader());
@@ -57,6 +57,7 @@ public class ImagePickerTest extends AppCompatActivity implements View.OnClickLi
         imagePicker.setCrop(false);
         images = new ArrayList<>();
         btnGetPic.setOnClickListener(this);
+        btnTakePic.setOnClickListener(this);
         ivShow.setOnClickListener(this);
     }
 
@@ -96,7 +97,17 @@ public class ImagePickerTest extends AppCompatActivity implements View.OnClickLi
                 if (images != null && images.size() > 0)
                     jumpPicsPreview(0);
                 break;
+            case R.id.btn_imagepickertest_take_pic:
+                takePics();
+                break;
         }
+    }
+
+    /**
+     * 直接拍照
+     */
+    private void takePics() {
+        ImagePicker.getInstance().takePicture(this, 500);
     }
 
     /**
@@ -117,6 +128,7 @@ public class ImagePickerTest extends AppCompatActivity implements View.OnClickLi
         intentPreview.putExtra(ImagePicker.EXTRA_IMAGE_ITEMS, images);
         intentPreview.putExtra(ImagePicker.EXTRA_SELECTED_IMAGE_POSITION, position);
         intentPreview.putExtra(ImagePicker.EXTRA_FROM_ITEMS, true);
+        intentPreview.putExtra("showDel", false);
         startActivityForResult(intentPreview, REQUEST_CODE_PREVIEW);
     }
 
@@ -144,6 +156,19 @@ public class ImagePickerTest extends AppCompatActivity implements View.OnClickLi
                     ivShow.setImageResource(R.drawable.ic_default_image);
                 }
             }
+        } else if (requestCode == 500) {//直接拍照返回
+            if (resultCode == 0) return;
+            //发送广播通知图片增加了
+            ImagePicker.galleryAddPic(this, imagePicker.getTakeImageFile());
+            String path = imagePicker.getTakeImageFile().getAbsolutePath();
+            ImageItem item = new ImageItem();
+            item.path = path;
+            if (images == null) images = new ArrayList<>();
+            images.clear();
+            images.add(item);
+            imagePicker.getImageLoader().displayImage(ImagePickerTest.this, path, ivShow, 800, 800);
+
+
         }
     }
 }

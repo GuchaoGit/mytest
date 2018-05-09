@@ -24,14 +24,20 @@ import com.lzy.imagepicker.util.NavigationBarChangeListener;
  * ================================================
  */
 public class ImagePreviewDelActivity extends ImagePreviewBaseActivity implements View.OnClickListener {
+    private boolean isShowDelBtn = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        isShowDelBtn = getIntent().getBooleanExtra("showDel", true);
         ImageView mBtnDel = (ImageView) findViewById(R.id.btn_del);
         mBtnDel.setOnClickListener(this);
-        mBtnDel.setVisibility(View.VISIBLE);
+        if (isShowDelBtn) {
+            mBtnDel.setVisibility(View.VISIBLE);
+        } else {
+            mBtnDel.setVisibility(View.GONE);
+        }
         topBar.findViewById(R.id.btn_back).setOnClickListener(this);
 
         mTitleCount.setText(getString(R.string.ip_preview_image_count, mCurrentPosition + 1, mImageItems.size()));

@@ -16,4 +16,11 @@
         android:text="获取照片"
         />
 
+    <Button
+        android:id="@+id/btn_imagepickertest_take_pic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_imagepickertest"
+        android:text="直接拍照" />
+
 </RelativeLayout>
