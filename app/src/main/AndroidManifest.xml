@@ -44,6 +44,9 @@
         <activity android:name=".ScrollTableLayoutTest"
             android:screenOrientation="portrait">
         </activity>
+        <activity android:name=".TestSwipeCardView"
+            android:screenOrientation="portrait">
+        </activity>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

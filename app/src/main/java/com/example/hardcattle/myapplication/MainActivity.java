@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.example.hardcattle.Utils.BinnerImageLoader;
 import com.example.hardcattle.bean.ParcelableBean;
 import com.example.hardcattle.bean.UserBean;
@@ -29,6 +30,7 @@ import com.mylhyl.acp.AcpOptions;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
+import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private AutoCompleteTextView tvShow;
     private AutoCompleteView autoCompleteView;
 
-    private TextView tvSlideMenu, tvAppName ,tvImageTest,testRefreshLayout;
+    private TextView tvSlideMenu, tvAppName ,tvImageTest,testRefreshLayout,tvTestSwipeCardView;
     private DrawerLayout mDrawLayout;
     private NavigationView mNaviView;
     private Button btnGsonTest,btnSortTest,btnScrollTableTest;
@@ -100,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initBanner(){
-        List<String> titles = new ArrayList(){
+        final List<String> titles = new ArrayList(){
             {
                 add("我们准备玩一场大的");
                 add("夏日美丽专属");
@@ -132,6 +134,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBanner.setIndicatorGravity(BannerConfig.RIGHT);
         //banner设置方法全部调用完毕时最后调用
         mBanner.start();
+        mBanner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                ToastUtils.showShort(titles.get(position));
+            }
+        });
     }
     private void findView() {
         tvShow = findViewById(R.id.auto_complete_tv);
@@ -146,6 +154,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvAppName = view.findViewById(R.id.tv_app_name);
         tvImageTest = view.findViewById(R.id.tv_imagepicker_test);
         testRefreshLayout = view.findViewById(R.id.tv_refresh_layout_test);
+        tvTestSwipeCardView = view.findViewById(R.id.tv_swipe_cardview_test);
         btnGsonTest = findViewById(R.id.btn_gson_test);
         btnSortTest = findViewById(R.id.btn_sort_test);
         btnScrollTableTest = findViewById(R.id.btn_scroll_test);
@@ -159,6 +168,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvImageTest.setOnClickListener(this);
         btnGsonTest.setOnClickListener(this);
         testRefreshLayout.setOnClickListener(this);
+        tvTestSwipeCardView.setOnClickListener(this);
         btnSortTest.setOnClickListener(this);
         btnScrollTableTest.setOnClickListener(this);
     }
@@ -205,6 +215,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_scroll_test:
                 startActivity(new Intent(this,ScrollTableLayoutTest.class));
+                break;
+            case R.id.tv_swipe_cardview_test://可滑动的SwipeCardView
+                startActivity(new Intent(this,TestSwipeCardView.class));
                 break;
         }
     }
