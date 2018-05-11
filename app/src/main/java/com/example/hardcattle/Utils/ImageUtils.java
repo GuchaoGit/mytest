@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.os.Environment;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -22,7 +23,7 @@ public class ImageUtils {
     public static int imgHeight = 1280;
 
     /**
-     * 图片压缩
+     * 图片尺寸压缩
      *
      * @param path
      * @return
@@ -57,12 +58,12 @@ public class ImageUtils {
      * 将Bitmap对象 保存到本地
      * 需要读写内存卡的权限，否则会发生异常
      *
-     * @param context
      * @param mBitmap
-     * @param filePath 图片路径  xxx/xxx/xx.jpg
+     * @param filePath 图片路径
+     * @param quality 图片质量  1---100
      * @return
      */
-    public static String saveBitmap(Context context, Bitmap mBitmap, String filePath) {
+    public static String saveBitmap( Bitmap mBitmap, String filePath,int quality) {
         File filePic;
         try {
             filePic = new File(filePath);
@@ -71,7 +72,7 @@ public class ImageUtils {
                 filePic.createNewFile();
             }
             FileOutputStream fos = new FileOutputStream(filePic);
-            mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            mBitmap.compress(Bitmap.CompressFormat.JPEG, quality, fos);
             fos.flush();
             fos.close();
         } catch (IOException e) {
@@ -184,5 +185,37 @@ public class ImageUtils {
     public static int dp2px(Context context, float dp) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dp * scale + 0.5f);
+    }
+
+    /**
+     * 原图片路径 压缩处理至 自己的缓存目录
+     * @param sourcePath
+     * @return
+     */
+    public File imageCompress(String sourcePath) {
+        String newStr = "";
+        String fileUrl = "";
+
+        Bitmap bmp = null;
+        newStr = sourcePath.substring(sourcePath.lastIndexOf("/") + 1, sourcePath.lastIndexOf(".")) + System.currentTimeMillis();
+        fileUrl = CACHE_PATH+ newStr + ".JPEG";
+
+        try {
+            bmp = revitionImageSize(sourcePath);
+            saveBitmap(bmp, fileUrl,50);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new File(fileUrl);
+    }
+
+    public static final String CACHE_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Cache/";
+    public static void makeFiles() {
+        File dirFirstFolder = new File(CACHE_PATH);
+        if (!dirFirstFolder.exists()) { //如果该文件夹不存在，则进行创建
+            dirFirstFolder.mkdirs();//创建文件夹
+            dirFirstFolder.setReadable(true);
+            dirFirstFolder.setWritable(true);
+        }
     }
 }
