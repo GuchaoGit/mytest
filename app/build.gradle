@@ -54,7 +54,6 @@ dependencies {
     implementation project(':imagepicker')
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'com.github.bumptech.glide:glide:3.7.0'
-
     /**
      * 下拉刷新 上拉加载布局
      */
@@ -62,6 +61,14 @@ dependencies {
     /**
      * 广告轮播
      */
-    implementation 'com.youth.banner:banner:1.4.10'  //最新版本
-
+    implementation 'com.youth.banner:banner:1.4.10'
+    //最新版本
+    /**
+     * 包裹自己  自动换行的布局
+     */
+    implementation 'am.widget:wraplayout:1.2.1'
+    /**
+     * 二维码扫描
+     */
+    implementation 'com.github.open-android:Zxing:v1.0.3'
 }

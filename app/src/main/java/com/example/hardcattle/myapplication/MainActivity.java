@@ -2,16 +2,14 @@ package com.example.hardcattle.myapplication;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,10 +18,8 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.ToastUtils;
 import com.example.hardcattle.Utils.BinnerImageLoader;
 import com.example.hardcattle.bean.ParcelableBean;
-import com.example.hardcattle.bean.UserBean;
 import com.example.hardcattle.widget.autocompleteview.AutoCompleteView;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.zxing.activity.CaptureActivity;
 import com.mylhyl.acp.Acp;
 import com.mylhyl.acp.AcpListener;
 import com.mylhyl.acp.AcpOptions;
@@ -46,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tvSlideMenu, tvAppName ,tvImageTest,testRefreshLayout,tvTestSwipeCardView;
     private DrawerLayout mDrawLayout;
     private NavigationView mNaviView;
-    private Button btnGsonTest,btnSortTest,btnScrollTableTest;
+    private Button btnGsonTest,btnSortTest,btnScrollTableTest,btnTestScanCode;
     private Banner mBanner;
     private List<ParcelableBean> userBeanList = new ArrayList<ParcelableBean>(){
         {
@@ -158,6 +154,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnGsonTest = findViewById(R.id.btn_gson_test);
         btnSortTest = findViewById(R.id.btn_sort_test);
         btnScrollTableTest = findViewById(R.id.btn_scroll_test);
+        btnTestScanCode = findViewById(R.id.btn_scan_code_test);
         autoCompleteView.setData("zylb");
 
     }
@@ -171,6 +168,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvTestSwipeCardView.setOnClickListener(this);
         btnSortTest.setOnClickListener(this);
         btnScrollTableTest.setOnClickListener(this);
+        btnTestScanCode.setOnClickListener(this);
     }
 
     /**
@@ -219,8 +217,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.tv_swipe_cardview_test://可滑动的SwipeCardView
                 startActivity(new Intent(this,TestSwipeCardView.class));
                 break;
+            case R.id.btn_scan_code_test://二维码扫描测试
+                Intent intent = new Intent(this,CaptureActivity.class);
+                startActivityForResult(intent,REQUEST_SCAN);
+                break;
         }
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_SCAN && resultCode == 0) {
+            if (data != null) {
+                String result = data.getStringExtra("qrcode_result");
+                btnTestScanCode.setText("扫描结果："+ result);
+            }
+        }
+    }
+
+    private final int REQUEST_SCAN = 110;
     /**
      * 权限检测
      */
@@ -228,7 +243,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Acp.getInstance(this).request(new AcpOptions.Builder()
                         .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE
                                 , Manifest.permission.READ_EXTERNAL_STORAGE
-                                ,Manifest.permission.INTERNET
+                                ,Manifest.permission.INTERNET,Manifest.permission.CAMERA
                         )
                         .build(),
                 new AcpListener() {

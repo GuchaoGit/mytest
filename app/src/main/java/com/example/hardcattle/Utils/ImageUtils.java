@@ -87,15 +87,15 @@ public class ImageUtils {
     /**
      * 压缩bitmap,并保存到指定路径
      *
-     * @param options  压缩比例
+     * @param quality  图片质量压缩比例
      * @param bitmap
      * @param filePath
      * @return 保存的文件路径  “”表示保存失败
      */
-    public static String compressBitmapToFile(int options, Bitmap bitmap, String filePath) {
+    public static String compressBitmapToFile(int quality, Bitmap bitmap, String filePath) {
         // 0-100 100为不压缩
-        if (options < 10) options = 10;
-        if (options > 100) options = 100;
+        if (quality < 10) quality = 10;
+        if (quality > 100) quality = 100;
         try {
             File file = new File(filePath);
             if (file.exists()) {
@@ -106,7 +106,7 @@ public class ImageUtils {
 
             FileOutputStream fos = new FileOutputStream(file);
             // 把压缩后的数据存放到baos中
-            bitmap.compress(Bitmap.CompressFormat.JPEG, options, fos);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, fos);
             fos.flush();
             fos.close();
             return filePath;
