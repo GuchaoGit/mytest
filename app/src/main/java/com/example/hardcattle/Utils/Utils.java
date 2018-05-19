@@ -877,5 +877,23 @@ public class Utils {
         return type;
     }
 
+    /**
+     * 设置activity 背景变灰
+     *
+     * @param activity
+     * @param alpha
+     */
+    public static void setWindowAlpha(Activity activity, float alpha) {
+        if (alpha < 0 || alpha > 1) return;
+        WindowManager.LayoutParams windowLP = activity.getWindow().getAttributes();
+        windowLP.alpha = alpha;
+        if (alpha == 1) {
+            activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);//不移除该Flag的话,在有视频的页面上的视频会出现黑屏的bug
+        } else {
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);//此行代码主要是解决在华为手机上半透明效果无效的bug
+        }
+        activity.getWindow().setAttributes(windowLP);
+    }
+
 
 }
