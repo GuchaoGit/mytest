@@ -172,7 +172,7 @@ public class Utils {
      * 判断对象是否为空
      *
      * @param obj 对象
-     * @return true：空对象 false：非空
+     * @return true：空对象，或数据为空 false：非空
      */
     public static boolean isEmpty(final Object obj) {
         if (obj == null) {
@@ -893,7 +893,6 @@ public class Utils {
         showDateSelectDialog(mContext, tvDate, "yyyy-MM-dd");
     }
     //endregion
-
 
     /*****************文件相关**********************/
     //region    文件相关
