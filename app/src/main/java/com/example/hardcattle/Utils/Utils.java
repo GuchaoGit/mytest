@@ -22,13 +22,23 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
 import android.support.v4.util.LongSparseArray;
 import android.support.v4.util.SimpleArrayMap;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.SparseArray;
 import android.util.SparseBooleanArray;
 import android.util.SparseIntArray;
 import android.util.SparseLongArray;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.TextView;
+
+import com.blankj.utilcode.util.ToastUtils;
+import com.codbking.widget.DatePickDialog;
+import com.codbking.widget.OnChangeLisener;
+import com.codbking.widget.OnSureLisener;
+import com.codbking.widget.bean.DateType;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -53,8 +63,9 @@ import java.util.regex.Pattern;
  */
 
 public class Utils {
-
     /********************验证相关***********************/
+    //region        验证相关
+
     /**
      * 验证手机号（简单验证）
      *
@@ -208,8 +219,10 @@ public class Utils {
         return false;
     }
 
+    //endregion
 
     /********************屏幕相关***********************/
+    //region 屏幕相关
 
     /**
      * 获取屏幕宽度（单位:px）
@@ -470,8 +483,9 @@ public class Utils {
             e.printStackTrace();
         }
     }
-
+//endregion
     /***********************APP相关*********************/
+    //region APP相关
 
     /**
      * 获取应用的版本号
@@ -646,8 +660,11 @@ public class Utils {
         return false;
     }
 
+    //endregion
 
     /**************************尺寸相关************/
+    //region 尺寸相关
+
     /**
      * dp转为px.
      *
@@ -693,8 +710,10 @@ public class Utils {
         return (int) (pxValue / fontScale + 0.5f);
     }
 
-
+    //endregion
     /***************时间格式转换相关****************/
+    //region    时间格式转换相关
+
     /**
      * 日期对象转为指定格式的字符串
      *
@@ -705,6 +724,29 @@ public class Utils {
     public static String date2Str(Date date, String pattern) {
         SimpleDateFormat sdf = new SimpleDateFormat(pattern);
         return sdf.format(date);
+    }
+
+    public static boolean isBeforeDate(Date date) {
+        Date curDate = new Date();
+        date.setHours(0);
+        date.setMinutes(0);
+        date.setSeconds(0);
+        return isBeforeTime(date);
+    }
+
+    /**
+     * 日期是否在当前之前
+     *
+     * @param date
+     * @return
+     */
+    public static boolean isBeforeTime(Date date) {
+        Date curDate = new Date();
+        if (date.getTime() <= curDate.getTime()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -733,8 +775,31 @@ public class Utils {
      * @return 时间字符串
      */
     public static String timeMillis2Str(long time, String pattern) {
-        Date date = new Date(time);
-        return date2Str(date, pattern);
+        try {
+            Date date = new Date(time);
+            return date2Str(date, pattern);
+        } catch (Exception e) {
+            return time + "";
+        }
+
+    }
+
+    /**
+     * 时间毫秒转为指定格式的字符串
+     *
+     * @param timeMillis 时间毫秒
+     * @param pattern    时间格式：eg:yyyy-MM-dd HH:mm:ss
+     * @return 时间字符串
+     * 若有异常， 返回原字符串
+     */
+    public static String timeMillis2Str(String timeMillis, String pattern) {
+        try {
+            Date date = new Date(Long.parseLong(timeMillis));
+            return date2Str(date, pattern);
+        } catch (Exception e) {
+            return TextUtils.isEmpty(timeMillis) ? "" : timeMillis;
+        }
+
     }
 
     /**
@@ -756,8 +821,83 @@ public class Utils {
         return date2Str(date, destnPattern);
     }
 
+    /**
+     * 选择日期or 时间
+     *
+     * @param mContext
+     * @param tvDate
+     * @param pattern
+     */
+    public static void showDateSelectDialog(Context mContext, final TextView tvDate, final String pattern) {
+        final SimpleDateFormat format = new SimpleDateFormat(pattern);
+        Date curDate;
+        if (TextUtils.isEmpty(tvDate.getText().toString().trim())) {
+            curDate = new Date();
+        } else {
+            curDate = str2Date(tvDate.getText().toString().trim(), pattern);
+        }
+        DatePickDialog slDialog = new DatePickDialog(mContext);
+        slDialog.setYearLimt(5);
+        slDialog.setTitle("选择时间");
+        slDialog.setMessageFormat(pattern);
+        switch (pattern) {
+            case "yyyy-MM-dd":
+                slDialog.setType(com.codbking.widget.bean.DateType.TYPE_YMD);
+                break;
+            case "yyyy-MM-dd HH:mm":
+                slDialog.setType(com.codbking.widget.bean.DateType.TYPE_YMDHM);
+                break;
+            case "HH:mm":
+                slDialog.setType(DateType.TYPE_HM);
+                break;
+        }
+        slDialog.setStartDate(curDate);
+        slDialog.setOnChangeLisener(new OnChangeLisener() {
+            @Override
+            public void onChanged(Date date) {
+
+            }
+        });
+        slDialog.setOnSureLisener(new OnSureLisener() {
+            @Override
+            public void onSure(Date date) {
+                switch (pattern) {
+                    case "yyyy-MM-dd":
+                        if (isBeforeDate(date)) {
+                            tvDate.setText(format.format(date));
+                        } else {
+                            ToastUtils.showShort("不能选择当前时间之后的时间");
+                        }
+                        break;
+                    case "yyyy-MM-dd HH:mm":
+                        if (isBeforeTime(date)) {
+                            tvDate.setText(format.format(date));
+                        } else {
+                            ToastUtils.showShort("不能选择当前时间之后的时间");
+                        }
+                        break;
+                }
+
+            }
+        });
+        slDialog.show();
+    }
+
+    /**
+     * 选择日期  格式为：yyyy-MM-dd
+     *
+     * @param mContext
+     * @param tvDate
+     */
+    public static void showDateSelectDialog(Context mContext, final TextView tvDate) {
+        showDateSelectDialog(mContext, tvDate, "yyyy-MM-dd");
+    }
+    //endregion
+
 
     /*****************文件相关**********************/
+    //region    文件相关
+
     /**
      * 判断文件是否是文件夹
      *
@@ -823,6 +963,10 @@ public class Utils {
         return dir.delete();
     }
 
+    //endregion
+
+    /*****************其他**********************/
+    //region    其他
     public static String getMimeType(String filePath) {
         MediaMetadataRetriever mmr = new MediaMetadataRetriever();
         String mime = "text/plain";
@@ -895,5 +1039,17 @@ public class Utils {
         activity.getWindow().setAttributes(windowLP);
     }
 
-
+    /**
+     * 往activity上添加水印布局
+     *
+     * @param activity 待添加水印activity
+     * @param layoutId 水印布局Id
+     */
+    public static boolean addWatermarkView(final Activity activity, int layoutId) {
+        final ViewGroup rootView = activity.getWindow().getDecorView().findViewById(android.R.id.content);
+        View framView = LayoutInflater.from(activity).inflate(layoutId, null);
+        rootView.addView(framView);
+        return true;
+    }
+    //endregion
 }

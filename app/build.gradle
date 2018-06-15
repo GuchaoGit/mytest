@@ -71,5 +71,12 @@ dependencies {
      *  二维码扫描
      */
     implementation 'com.github.open-android:Zxing:v1.0.3'
+    /**
+     * NFC读取jar 包
+     */
     implementation files('src/main/libs/guavalib.jar')
+    /**
+     * 日期选择
+     */
+    implementation 'com.github.codbking:PickTime:v1.0.1'
 }
