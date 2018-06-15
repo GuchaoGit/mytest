@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.ToastUtils;
 import com.example.hardcattle.Utils.BinnerImageLoader;
 import com.example.hardcattle.bean.ParcelableBean;
+import com.example.hardcattle.nfc_reader.ActivityTagViewer;
 import com.example.hardcattle.widget.autocompleteview.AutoCompleteView;
 import com.google.zxing.activity.CaptureActivity;
 import com.mylhyl.acp.Acp;
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tvSlideMenu, tvAppName ,tvImageTest,testRefreshLayout,tvTestSwipeCardView;
     private DrawerLayout mDrawLayout;
     private NavigationView mNaviView;
-    private Button btnGsonTest,btnSortTest,btnScrollTableTest,btnTestScanCode;
+    private Button btnGsonTest, btnSortTest, btnScrollTableTest, btnTestScanCode, btnNfcTest;
     private Banner mBanner;
     private List<ParcelableBean> userBeanList = new ArrayList<ParcelableBean>(){
         {
@@ -155,6 +156,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnSortTest = findViewById(R.id.btn_sort_test);
         btnScrollTableTest = findViewById(R.id.btn_scroll_test);
         btnTestScanCode = findViewById(R.id.btn_scan_code_test);
+        btnNfcTest = findViewById(R.id.btn_nfc_test);
         autoCompleteView.setData("zylb");
 
     }
@@ -169,6 +171,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnSortTest.setOnClickListener(this);
         btnScrollTableTest.setOnClickListener(this);
         btnTestScanCode.setOnClickListener(this);
+        btnNfcTest.setOnClickListener(this);
     }
 
     /**
@@ -221,6 +224,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(this,CaptureActivity.class);
                 startActivityForResult(intent,REQUEST_SCAN);
                 break;
+            case R.id.btn_nfc_test:
+                Intent intent1 = new Intent(this, ActivityTagViewer.class);
+                startActivity(intent1);
+                break;
         }
     }
 
@@ -266,13 +273,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * 测试Gson
      */
     private void testGson(){
+//        String gsonstr = "{\"id\":\"001\",\"name\":null,\"number\":\"3221233\"}";
 //        UserBean user = new UserBean();
-//        user.setId("001");
-//        user.setName("Tomi");
-//        user.setNumber("3221233");
 //        Gson gson = new Gson();
-//        String userG=gson.toJson(user,UserBean.class);
-//        btnGsonTest.setText(userG);
+//        UserBean userBean =gson.fromJson(gsonstr,UserBean.class);
+
         ParcelableBean bean = new ParcelableBean();
         bean.setRight(true);
         bean.setAge(23);

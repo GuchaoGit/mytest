@@ -68,6 +68,13 @@
                 android:layout_height="wrap_content"
                 android:text="二维码扫描测试"
                 android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/btn_nfc_test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NFC"
+                android:textAllCaps="false" />
             <com.example.hardcattle.widget.CustomSpinner
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"

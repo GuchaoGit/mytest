@@ -11,8 +11,11 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-
-
+    <!--NFC-->
+    <uses-permission android:name="android.permission.NFC" />
+    <uses-feature
+        android:name="android.hardware.nfc"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -47,6 +50,11 @@
         <activity android:name=".TestSwipeCardView"
             android:screenOrientation="portrait">
         </activity>
+
+        <activity
+            android:name="com.example.hardcattle.nfc_reader.ActivityTagViewer"
+            android:alwaysRetainTaskState="true"
+            android:launchMode="singleInstance" />
 
     </application>
 
