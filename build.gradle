@@ -8,8 +8,8 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
-        
 
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -25,4 +25,19 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext {
+    applicationId= 'com.example.hardcattle.myapplication'
+    compileSdkVersion = 27
+    buildToolsVersion = '27.0.3'
+    targetSdkVersion = 27
+    minSdkVersion = 19
+    versionCode = 1
+    versionName = '1.0'
+    beta_number = 1
+
+//    app dependencies
+    updateAppVersion = "3.3.8"
+    okhttputilsVersion = "2.6.2"
 }
