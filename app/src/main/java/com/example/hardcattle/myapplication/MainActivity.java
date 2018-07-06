@@ -224,7 +224,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(this,CaptureActivity.class);
                 startActivityForResult(intent,REQUEST_SCAN);
                 break;
-            case R.id.btn_nfc_test:
+            case R.id.btn_nfc_test://nfc功能测试
                 Intent intent1 = new Intent(this, ActivityTagViewer.class);
                 startActivity(intent1);
                 break;
@@ -251,6 +251,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE
                                 , Manifest.permission.READ_EXTERNAL_STORAGE
                                 ,Manifest.permission.INTERNET,Manifest.permission.CAMERA
+                                , Manifest.permission.NFC
                         )
                         .build(),
                 new AcpListener() {

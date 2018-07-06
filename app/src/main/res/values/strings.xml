@@ -12,4 +12,5 @@
     <string name="menu_copy_dec">Dec</string>
     <string name="menu_copy_reversed_dec">Reversed dec</string>
     <string name="nothing_scanned">Nothing scanned yet</string>
+    <string name="str_no_data">暂无数据</string>
 </resources>
