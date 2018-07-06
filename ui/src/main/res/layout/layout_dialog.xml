@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/selector_oval_top"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:text="@string/str_nul"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/middle_text_size" />
+    </RelativeLayout>
+
+    <View style="@style/StyleDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_cancle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_oval_bottom_left"
+            android:gravity="center"
+            android:text="@string/str_cancle"
+            android:textSize="@dimen/middle_text_size" />
+
+        <View style="@style/StyleDividerVertical" />
+
+        <TextView
+            android:id="@+id/tv_sure"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_oval_bottom_right"
+            android:gravity="center"
+            android:text="@string/str_sure"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/middle_text_size" />
+    </LinearLayout>
+</LinearLayout>

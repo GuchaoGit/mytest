@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minHeight="50dp"
+    android:padding="8dp">
+
+    <EditText
+        android:id="@+id/et_search"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_centerVertical="true"
+        android:background="@drawable/shape_bg_search"
+        android:hint="请输入"
+        android:imeOptions="actionSearch"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:singleLine="true" />
+
+    <Button
+        android:id="@+id/btn_search_view"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignEnd="@id/et_search"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/search"
+        android:padding="5dp" />
+
+    <Button
+        android:id="@+id/btn_clear_search_view"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:layout_toStartOf="@id/btn_search_view"
+        android:background="@drawable/selector_btn_delete" />
+</RelativeLayout>

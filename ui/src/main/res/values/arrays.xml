@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="dropdown_array_default_with_key">
+        <item>op1_丢失</item>
+        <item>op2_损坏</item>
+        <item>op3_标准地址信息错误</item>
+    </string-array>
+</resources>

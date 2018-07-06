@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">ui</string>
+    <string name="str_login">登录</string>
+    <string name="str_cancle">取消</string>
+    <string name="str_sure">确定</string>
+    <string name="str_nul">暂无</string>
+    <string name="common_loading">加载中...</string>
+    <string name="tips_null_key_words">查询条件不能为空</string>
+</resources>

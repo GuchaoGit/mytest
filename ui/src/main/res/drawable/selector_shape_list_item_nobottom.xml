@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <layer-list>
+            <!-- 主体背景颜色值 -->
+            <item android:left="1dp" android:right="1dp" android:top="1dp">
+                <!--边框里面背景颜色 白色-->
+                <shape>
+                    <solid android:color="@android:color/white" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+</selector>
