@@ -1,10 +1,10 @@
-package com.hnhy.ui.dialog;
+package com.guc.ui.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.widget.TextView;
 
-import com.hnhy.ui.R;
+import com.guc.ui.R;
 
 /**
  * Author:guc

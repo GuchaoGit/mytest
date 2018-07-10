@@ -1,7 +1,7 @@
 /**
  * @version 1.0  2015年1月27日
  */
-package com.hnhy.ui.tools;
+package com.guc.ui.tools;
 
 import android.content.Context;
 import android.view.View;

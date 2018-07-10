@@ -1,4 +1,4 @@
-package com.hnhy.ui.adapter;
+package com.guc.ui.adapter;
 
 import android.content.Context;
 import android.os.Handler;
@@ -11,8 +11,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.hnhy.ui.DropDownView;
-import com.hnhy.ui.R;
+import com.guc.ui.DropDownView;
+import com.guc.ui.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package com.hnhy.ui;
+package com.guc.ui;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

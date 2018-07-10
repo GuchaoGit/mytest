@@ -1,5 +1,5 @@
 
-package com.hnhy.ui.recyclerview;
+package com.guc.ui.recyclerview;
 
 import android.content.Context;
 import android.support.annotation.Nullable;

@@ -1,4 +1,4 @@
-package com.hnhy.ui.panel;
+package com.guc.ui.panel;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;

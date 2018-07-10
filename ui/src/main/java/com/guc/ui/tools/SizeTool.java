@@ -1,4 +1,4 @@
-package com.hnhy.ui.tools;
+package com.guc.ui.tools;
 
 import android.content.Context;
 import android.view.View;

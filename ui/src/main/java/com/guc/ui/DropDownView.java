@@ -1,4 +1,4 @@
-package com.hnhy.ui;
+package com.guc.ui;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -9,9 +9,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.hnhy.ui.tools.KeyBoardTool;
-import com.hnhy.ui.tools.SizeTool;
-import com.hnhy.ui.tools.StringTool;
+import com.guc.ui.tools.KeyBoardTool;
+import com.guc.ui.tools.SizeTool;
+import com.guc.ui.tools.StringTool;
 
 import java.util.ArrayList;
 import java.util.HashMap;
