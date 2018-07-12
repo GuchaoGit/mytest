@@ -13,6 +13,7 @@
         android:focusableInTouchMode="true"
         android:keyBackground="@color/colorWhite"
         android:keyPreviewHeight="40dp"
+        android:keyPreviewOffset="10dp"
         android:keyPreviewLayout="@layout/lyt_preview"
         android:keyTextColor="#333"
         android:shadowColor="#00000000" />

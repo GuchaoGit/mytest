@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tvSlideMenu, tvAppName ,tvImageTest,testRefreshLayout,tvTestSwipeCardView;
     private DrawerLayout mDrawLayout;
     private NavigationView mNaviView;
-    private Button btnGsonTest, btnSortTest, btnScrollTableTest, btnTestScanCode, btnNfcTest, btnKeyBoardTest;
+    private Button btnGsonTest, btnSortTest, btnScrollTableTest, btnTestScanCode, btnNfcTest, btnKeyBoardTest, btnNoticeTest;
     private Banner mBanner;
     private List<ParcelableBean> userBeanList = new ArrayList<ParcelableBean>(){
         {
@@ -157,6 +157,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnTestScanCode = findViewById(R.id.btn_scan_code_test);
         btnNfcTest = findViewById(R.id.btn_nfc_test);
         btnKeyBoardTest = findViewById(R.id.btn_keyboard_test);
+        btnNoticeTest = findViewById(R.id.btn_notice_test);
         autoCompleteView.setData("zylb");
 
     }
@@ -173,6 +174,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnTestScanCode.setOnClickListener(this);
         btnNfcTest.setOnClickListener(this);
         btnKeyBoardTest.setOnClickListener(this);
+        btnNoticeTest.setOnClickListener(this);
     }
 
     /**
@@ -233,6 +235,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_keyboard_test:
                 Intent intent2 = new Intent(this, TestCustomKeyBoard.class);
                 startActivity(intent2);
+                break;
+            case R.id.btn_notice_test://通知
+                Intent intent3 = new Intent(this, TestNotice.class);
+                startActivity(intent3);
                 break;
         }
     }

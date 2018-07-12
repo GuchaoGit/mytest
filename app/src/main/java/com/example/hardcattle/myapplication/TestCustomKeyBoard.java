@@ -1,6 +1,7 @@
 package com.example.hardcattle.myapplication;
 
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.MotionEvent;
@@ -20,6 +21,8 @@ import butterknife.ButterKnife;
 public class TestCustomKeyBoard extends Activity {
     @BindView(R.id.et_input)
     EditText mEtInput;
+    @BindView(R.id.et_input2)
+    EditText mEtInput2;
     @BindView(R.id.my_kv)
     MyKeyBoardView mMyKv;
 
@@ -33,15 +36,30 @@ public class TestCustomKeyBoard extends Activity {
 
     private void initView() {
 
-        mMyKv.setStrReceiver(mEtInput);
         mEtInput.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 mMyKv.setVisibility(View.VISIBLE);
                 KeyBoardUtil.showKeyBoard(TestCustomKeyBoard.this, mEtInput);
-                return true;
+                mMyKv.setStrReceiver(mEtInput);
+                return false;
             }
         });
+        mEtInput2.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                mMyKv.setVisibility(View.VISIBLE);
+                KeyBoardUtil.showKeyBoard(TestCustomKeyBoard.this, mEtInput2);
+                mMyKv.setStrReceiver(mEtInput2);
+                return false;
+            }
+        });
+//        mEtInput.setInputType(InputType.TYPE_NULL);
+//        mEtInput.setInputType(InputType.TYPE_NULL);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mEtInput.setShowSoftInputOnFocus(false);
+            mEtInput2.setShowSoftInputOnFocus(false);
+        }
         mMyKv.setOnInputFinishListener(new MyKeyBoardView.OnInputFinishListener() {
             @Override
             public void onFinish() {

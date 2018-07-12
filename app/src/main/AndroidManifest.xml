@@ -59,6 +59,9 @@
             android:name="com.example.hardcattle.myapplication.TestCustomKeyBoard"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.example.hardcattle.myapplication.TestNotice"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.example.hardcattle.myapplication.NFCTest"
             android:screenOrientation="portrait">
             <intent-filter>
