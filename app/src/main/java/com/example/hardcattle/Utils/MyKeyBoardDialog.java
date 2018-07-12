@@ -28,7 +28,9 @@ public class MyKeyBoardDialog extends Dialog {
     }
 
     public MyKeyBoardDialog(@NonNull Context context, int themeResId) {
-        this(context, false, null);
+        super(context, themeResId);
+        setContentView(R.layout.layout_keyboard);
+        initView();
     }
 
     public MyKeyBoardDialog(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener) {

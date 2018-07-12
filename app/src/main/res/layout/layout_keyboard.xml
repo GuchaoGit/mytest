@@ -10,6 +10,7 @@
         android:background="@color/colorWhite"
         android:gravity="center"
         android:text="自定义安全键盘"
+        android:textColor="#333"
         android:textSize="16sp" />
 
     <View
