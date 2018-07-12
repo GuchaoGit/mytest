@@ -55,6 +55,25 @@
             android:name="com.example.hardcattle.nfc_reader.ActivityTagViewer"
             android:alwaysRetainTaskState="true"
             android:launchMode="singleInstance" />
+        <activity
+            android:name="com.example.hardcattle.myapplication.TestCustomKeyBoard"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.hardcattle.myapplication.NFCTest"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
+            </intent-filter>
+            <meta-data
+                android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
+                android:resource="@xml/device_filteryishu" />
+            <intent-filter>
+                <action android:name="android.nfc.action.TECH_DISCOVERED" />
+            </intent-filter>
+            <meta-data
+                android:name="android.nfc.action.TECH_DISCOVERED"
+                android:resource="@xml/nfc_tech_filter" />
+        </activity>
 
     </application>
 

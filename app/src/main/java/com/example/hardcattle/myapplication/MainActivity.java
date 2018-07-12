@@ -18,7 +18,6 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.ToastUtils;
 import com.example.hardcattle.Utils.BinnerImageLoader;
 import com.example.hardcattle.bean.ParcelableBean;
-import com.example.hardcattle.nfc_reader.ActivityTagViewer;
 import com.example.hardcattle.widget.autocompleteview.AutoCompleteView;
 import com.google.zxing.activity.CaptureActivity;
 import com.mylhyl.acp.Acp;
@@ -43,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tvSlideMenu, tvAppName ,tvImageTest,testRefreshLayout,tvTestSwipeCardView;
     private DrawerLayout mDrawLayout;
     private NavigationView mNaviView;
-    private Button btnGsonTest, btnSortTest, btnScrollTableTest, btnTestScanCode, btnNfcTest;
+    private Button btnGsonTest, btnSortTest, btnScrollTableTest, btnTestScanCode, btnNfcTest, btnKeyBoardTest;
     private Banner mBanner;
     private List<ParcelableBean> userBeanList = new ArrayList<ParcelableBean>(){
         {
@@ -157,6 +156,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnScrollTableTest = findViewById(R.id.btn_scroll_test);
         btnTestScanCode = findViewById(R.id.btn_scan_code_test);
         btnNfcTest = findViewById(R.id.btn_nfc_test);
+        btnKeyBoardTest = findViewById(R.id.btn_keyboard_test);
         autoCompleteView.setData("zylb");
 
     }
@@ -172,6 +172,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnScrollTableTest.setOnClickListener(this);
         btnTestScanCode.setOnClickListener(this);
         btnNfcTest.setOnClickListener(this);
+        btnKeyBoardTest.setOnClickListener(this);
     }
 
     /**
@@ -225,8 +226,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivityForResult(intent,REQUEST_SCAN);
                 break;
             case R.id.btn_nfc_test://nfc功能测试
-                Intent intent1 = new Intent(this, ActivityTagViewer.class);
+//                Intent intent1 = new Intent(this, ActivityTagViewer.class);
+                Intent intent1 = new Intent(this, NFCTest.class);
                 startActivity(intent1);
+                break;
+            case R.id.btn_keyboard_test:
+                Intent intent2 = new Intent(this, TestCustomKeyBoard.class);
+                startActivity(intent2);
                 break;
         }
     }

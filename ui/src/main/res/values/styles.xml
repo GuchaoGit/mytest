@@ -43,4 +43,15 @@
     <style name="LoadingDialog" parent="@style/TransDialog">
         <item name="android:backgroundDimEnabled">false</item>
     </style>
+    <!--软键盘样式-->
+    <style name="KeyboardDialog" parent="@style/TransDialog">
+        <item name="android:windowAnimationStyle">@style/style_bottom_slide_anim</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <!--窗体动画-->
+    <style name="style_bottom_slide_anim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/anim_bottom_slide_enter</item>
+        <item name="android:windowExitAnimation">@anim/anim_bottom_slide_exit</item>
+    </style>
 </resources>
