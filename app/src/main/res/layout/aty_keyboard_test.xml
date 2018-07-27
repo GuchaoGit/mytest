@@ -21,4 +21,12 @@
         android:layout_marginTop="@dimen/dimen_100dp"
         android:visibility="gone"></com.guc.ui.MyKeyBoardView>
 
+    <com.guc.ui.KeyBoardCarNumberView
+        android:id="@+id/my_kv2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+    </com.guc.ui.KeyBoardCarNumberView>
+
 </LinearLayout>

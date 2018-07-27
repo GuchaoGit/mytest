@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
+    android:horizontalGap="1dp"
+    android:keyHeight="45dp"
+    android:keyWidth="19%p"
+    android:verticalGap="1dp">
+    <!--    // KeyBoard标签下的keyWidth="10%p"表示下面的每个键宽度占parent宽度的10%，xxxGap属性是键与键之间的水平和垂直间隔-->
+
+    <Row>
+        <Key
+            android:codes="65"
+            android:horizontalGap="2%p"
+            android:keyEdgeFlags="left"
+            android:keyLabel="A" />
+        <Key
+            android:codes="66"
+            android:keyLabel="B" />
+        <Key
+            android:codes="67"
+            android:keyLabel="C" />
+        <Key
+            android:codes="68"
+            android:keyLabel="D" />
+
+        <Key
+            android:codes="69"
+            android:keyEdgeFlags="right"
+            android:keyLabel="E" />
+    </Row>
+    <Row>
+        <Key
+            android:codes="70"
+            android:horizontalGap="2%p"
+            android:keyEdgeFlags="left"
+            android:keyLabel="F" />
+        <Key
+            android:codes="71"
+            android:keyLabel="G" />
+        <Key
+            android:codes="72"
+            android:keyLabel="H" />
+        <Key
+            android:codes="73"
+            android:keyLabel="I" />
+
+        <Key
+            android:codes="74"
+            android:keyEdgeFlags="right"
+            android:keyLabel="J" />
+    </Row>
+
+    <Row>
+        <Key
+            android:codes="75"
+            android:horizontalGap="2%p"
+            android:keyEdgeFlags="left"
+            android:keyLabel="K" />
+        <Key
+            android:codes="76"
+            android:keyLabel="L" />
+        <Key
+            android:codes="77"
+            android:keyLabel="M" />
+        <Key
+            android:codes="78"
+            android:keyLabel="N" />
+
+        <Key
+            android:codes="79"
+            android:keyEdgeFlags="right"
+            android:keyLabel="O" />
+    </Row>
+    <Row>
+        <Key
+            android:codes="80"
+            android:horizontalGap="2%p"
+            android:keyEdgeFlags="left"
+            android:keyLabel="P" />
+        <Key
+            android:codes="81"
+            android:keyLabel="Q" />
+        <Key
+            android:codes="82"
+            android:keyLabel="R" />
+        <Key
+            android:codes="83"
+            android:keyLabel="S" />
+
+        <Key
+            android:codes="84"
+            android:keyEdgeFlags="right"
+            android:keyLabel="T" />
+    </Row>
+    <Row>
+        <Key
+            android:codes="85"
+            android:horizontalGap="2%p"
+            android:keyEdgeFlags="left"
+            android:keyLabel="U" />
+        <Key
+            android:codes="86"
+            android:keyLabel="V" />
+        <Key
+            android:codes="87"
+            android:keyLabel="W" />
+        <Key
+            android:codes="88"
+            android:keyLabel="X" />
+
+        <Key
+            android:codes="89"
+            android:keyEdgeFlags="right"
+            android:keyLabel="Y" />
+    </Row>
+    <Row>
+        <Key
+            android:codes="90"
+            android:horizontalGap="2%p"
+            android:keyEdgeFlags="left"
+            android:keyLabel="Z" />
+    </Row>
+    <!--
+        // Key标签下的keyWidth属性会覆盖parent中赋的值，isRepeatable属性表示是长按时是否重复输入
+    -->
+
+    <Row android:rowEdgeFlags="bottom">
+        <Key
+            android:codes="100"
+            android:horizontalGap="2%p"
+            android:keyLabel="全部复制"
+            android:keyWidth="32%p" />
+        <Key
+            android:codes="-5"
+            android:isRepeatable="true"
+            android:keyLabel="删除"
+            android:keyWidth="31%p" />
+        <Key
+            android:codes="-4"
+            android:keyEdgeFlags="right"
+            android:keyLabel="确定"
+            android:keyWidth="32%p" />
+    </Row>
+</Keyboard>

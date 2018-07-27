@@ -5,7 +5,8 @@ android {
         config {
             keyAlias 'test1'
             keyPassword '111111'
-            storeFile file('E:/mytest.jks')
+//            storeFile file('E:/mytest.jks')
+            storeFile file('../mytest.jks')
             storePassword '111111'
         }
     }
@@ -39,6 +40,16 @@ android {
 
 }
 
+android.applicationVariants.all { variant ->
+    variant.outputs.all {
+        outputFileName ="test" + "_${variant.versionName}_${variant.name}_${currentTime()}.apk"
+    }
+}
+
+def currentTime() {
+    return new Date().format("yyyyMMddHHmmss")
+}
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.0.1'
@@ -65,28 +76,28 @@ dependencies {
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     /**
-     *      下拉刷新 上拉加载布局
+     *       下拉刷新 上拉加载布局
      */
     compile 'com.lcodecorex:tkrefreshlayout:+@aar'
     /**
-     *      广告轮播
+     *       广告轮播
      */
     implementation 'com.youth.banner:banner:1.4.10'
     //最新版本
     /**
-     *      包裹自己  自动换行的布局
+     *       包裹自己  自动换行的布局
      */
     implementation 'am.widget:wraplayout:1.2.1'
     /**
-     *      二维码扫描
+     *       二维码扫描
      */
     //    implementation 'com.github.open-android:Zxing:v1.0.3'
     /**
-     *     日期选择
+     *      日期选择
      */
     implementation 'com.github.codbking:PickTime:v1.0.1'
-
     //注解
     implementation 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    implementation files('libs/BaiduLBS_Android.jar')
 }

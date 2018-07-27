@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tvSlideMenu, tvAppName ,tvImageTest,testRefreshLayout,tvTestSwipeCardView;
     private DrawerLayout mDrawLayout;
     private NavigationView mNaviView;
-    private Button btnGsonTest, btnSortTest, btnScrollTableTest, btnTestScanCode, btnNfcTest, btnKeyBoardTest, btnNoticeTest;
+    private Button btnGsonTest, btnSortTest, btnScrollTableTest, btnTestScanCode, btnNfcTest, btnKeyBoardTest, btnNoticeTest, btnMapTest;
     private Banner mBanner;
     private List<ParcelableBean> userBeanList = new ArrayList<ParcelableBean>(){
         {
@@ -79,6 +79,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initListener();
         testStringArray();
         checkPermissions();
+
+        A a = new A();
+        int i = 0;
+        a.fermin(i);
+        i = i++;
+        Log.e("aaa", i + "");
     }
 
     private void setStatusBar(){
@@ -158,6 +164,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnNfcTest = findViewById(R.id.btn_nfc_test);
         btnKeyBoardTest = findViewById(R.id.btn_keyboard_test);
         btnNoticeTest = findViewById(R.id.btn_notice_test);
+        btnMapTest = findViewById(R.id.btn_map_test);
         autoCompleteView.setData("zylb");
 
     }
@@ -175,6 +182,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnNfcTest.setOnClickListener(this);
         btnKeyBoardTest.setOnClickListener(this);
         btnNoticeTest.setOnClickListener(this);
+        btnMapTest.setOnClickListener(this);
     }
 
     /**
@@ -240,6 +248,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent3 = new Intent(this, TestNotice.class);
                 startActivity(intent3);
                 break;
+            case R.id.btn_map_test://百度地图
+                Intent intent4 = new Intent(this, TestBaiDuMap.class);
+                startActivity(intent4);
+                break;
         }
     }
 
@@ -264,6 +276,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 , Manifest.permission.READ_EXTERNAL_STORAGE
                                 ,Manifest.permission.INTERNET,Manifest.permission.CAMERA
                                 , Manifest.permission.NFC
+                                , Manifest.permission.ACCESS_FINE_LOCATION
+                                , Manifest.permission.ACCESS_COARSE_LOCATION
                         )
                         .build(),
                 new AcpListener() {
@@ -322,5 +336,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             sb.append(bean.getName()+ bean.getAge()+"\n");
         }
         btnSortTest.setText(sb.toString());
+    }
+
+    class A {
+        void fermin(int i) {
+            i++;
+        }
     }
 }

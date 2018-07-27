@@ -8,7 +8,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.hardcattle.Utils.KeyBoardUtil;
+import com.example.hardcattle.Utils.KeyBoardCarNumberUtil;
+import com.guc.ui.KeyBoardCarNumberView;
 import com.guc.ui.MyKeyBoardView;
 
 import butterknife.BindView;
@@ -25,6 +26,8 @@ public class TestCustomKeyBoard extends Activity {
     EditText mEtInput2;
     @BindView(R.id.my_kv)
     MyKeyBoardView mMyKv;
+    @BindView(R.id.my_kv2)
+    KeyBoardCarNumberView mMyKv2;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,18 +42,20 @@ public class TestCustomKeyBoard extends Activity {
         mEtInput.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                mMyKv.setVisibility(View.VISIBLE);
-                KeyBoardUtil.showKeyBoard(TestCustomKeyBoard.this, mEtInput);
-                mMyKv.setStrReceiver(mEtInput);
+//                mMyKv2.setVisibility(View.VISIBLE);
+//                KeyBoardUtil.showKeyBoard(TestCustomKeyBoard.this, mEtInput);
+//                mMyKv2.setStrReceiver(mEtInput);
+                KeyBoardCarNumberUtil.showKeyBoard(TestCustomKeyBoard.this, mEtInput);
                 return false;
             }
         });
         mEtInput2.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                mMyKv.setVisibility(View.VISIBLE);
-                KeyBoardUtil.showKeyBoard(TestCustomKeyBoard.this, mEtInput2);
-                mMyKv.setStrReceiver(mEtInput2);
+//                mMyKv2.setVisibility(View.VISIBLE);
+//                KeyBoardUtil.showKeyBoard(TestCustomKeyBoard.this, mEtInput2);
+//                mMyKv2.setStrReceiver(mEtInput2);
+                KeyBoardCarNumberUtil.showKeyBoard(TestCustomKeyBoard.this, mEtInput2);
                 return false;
             }
         });
@@ -60,18 +65,18 @@ public class TestCustomKeyBoard extends Activity {
             mEtInput.setShowSoftInputOnFocus(false);
             mEtInput2.setShowSoftInputOnFocus(false);
         }
-        mMyKv.setOnInputFinishListener(new MyKeyBoardView.OnInputFinishListener() {
+        mMyKv2.setOnInputFinishListener(new KeyBoardCarNumberView.OnInputFinishListener() {
             @Override
             public void onFinish() {
-                mMyKv.setVisibility(View.GONE);
+                mMyKv2.setVisibility(View.GONE);
             }
         });
     }
 
     @Override
     public void onBackPressed() {
-        if (KeyBoardUtil.isShowing()) {
-            KeyBoardUtil.hideKeyBoard();
+        if (KeyBoardCarNumberUtil.isShowing()) {
+            KeyBoardCarNumberUtil.hideKeyBoard();
         } else {
             super.onBackPressed();
         }
