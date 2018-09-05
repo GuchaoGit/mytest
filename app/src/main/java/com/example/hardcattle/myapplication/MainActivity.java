@@ -18,8 +18,11 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.ToastUtils;
 import com.example.hardcattle.Utils.BinnerImageLoader;
 import com.example.hardcattle.bean.ParcelableBean;
+import com.example.hardcattle.nfc_reader.ActivityTagViewer;
 import com.example.hardcattle.widget.autocompleteview.AutoCompleteView;
 import com.google.zxing.activity.CaptureActivity;
+import com.guc.ui.popup.BeanKeyValue;
+import com.guc.ui.popup.PopupWindowSelect;
 import com.mylhyl.acp.Acp;
 import com.mylhyl.acp.AcpListener;
 import com.mylhyl.acp.AcpOptions;
@@ -42,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tvSlideMenu, tvAppName ,tvImageTest,testRefreshLayout,tvTestSwipeCardView;
     private DrawerLayout mDrawLayout;
     private NavigationView mNaviView;
-    private Button btnGsonTest, btnSortTest, btnScrollTableTest, btnTestScanCode, btnNfcTest, btnKeyBoardTest, btnNoticeTest, btnMapTest;
+    private Button btnGsonTest, btnSortTest, btnScrollTableTest, btnTestScanCode, btnNfcTest, btnKeyBoardTest, btnNoticeTest, btnMapTest, btnSelectTest;
     private Banner mBanner;
     private List<ParcelableBean> userBeanList = new ArrayList<ParcelableBean>(){
         {
@@ -165,6 +168,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnKeyBoardTest = findViewById(R.id.btn_keyboard_test);
         btnNoticeTest = findViewById(R.id.btn_notice_test);
         btnMapTest = findViewById(R.id.btn_map_test);
+        btnSelectTest = findViewById(R.id.btn_select_test);
         autoCompleteView.setData("zylb");
 
     }
@@ -183,6 +187,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnKeyBoardTest.setOnClickListener(this);
         btnNoticeTest.setOnClickListener(this);
         btnMapTest.setOnClickListener(this);
+        btnSelectTest.setOnClickListener(this);
     }
 
     /**
@@ -236,8 +241,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivityForResult(intent,REQUEST_SCAN);
                 break;
             case R.id.btn_nfc_test://nfc功能测试
-//                Intent intent1 = new Intent(this, ActivityTagViewer.class);
-                Intent intent1 = new Intent(this, NFCTest.class);
+                Intent intent1 = new Intent(this, ActivityTagViewer.class);
+//                Intent intent1 = new Intent(this, NFCTest.class);
                 startActivity(intent1);
                 break;
             case R.id.btn_keyboard_test:
@@ -251,6 +256,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_map_test://百度地图
                 Intent intent4 = new Intent(this, TestBaiDuMap.class);
                 startActivity(intent4);
+                break;
+            case R.id.btn_select_test://下拉单选
+                List<BeanKeyValue> data = new ArrayList<>();
+                BeanKeyValue bean;
+                for (int i = 0; i < 5; i++) {
+                    bean = new BeanKeyValue();
+                    bean.key = "key_" + i;
+                    bean.value = "value_" + i;
+                    data.add(bean);
+                }
+                PopupWindowSelect popupWindowSelect = new PopupWindowSelect(this, btnSelectTest, data);
+                popupWindowSelect.showBelow();
                 break;
         }
     }

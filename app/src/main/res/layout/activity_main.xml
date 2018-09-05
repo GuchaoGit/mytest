@@ -49,6 +49,13 @@
                 android:layout_height="wrap_content"
                 android:text="Gson测试"
                 android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/btn_select_test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="下拉单选测试"
+                android:textAllCaps="false" />
             <Button
                 android:id="@+id/btn_sort_test"
                 android:layout_width="wrap_content"
