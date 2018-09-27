@@ -39,4 +39,6 @@ ext {
 //    app dependencies
     updateAppVersion = "3.3.8"
     okhttputilsVersion = "2.6.2"
+
+    gsonVersion = "2.8.2"
 }

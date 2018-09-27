@@ -54,4 +54,11 @@
         <item name="android:windowEnterAnimation">@anim/anim_bottom_slide_enter</item>
         <item name="android:windowExitAnimation">@anim/anim_bottom_slide_exit</item>
     </style>
+
+    <style name="AppTheme.AppCompat.Dialog.Alert" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowMinWidthMinor">90%</item>
+        <item name="android:windowMinWidthMajor">90%</item>
+        <item name="android:maxWidth">1080px</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
 </resources>
