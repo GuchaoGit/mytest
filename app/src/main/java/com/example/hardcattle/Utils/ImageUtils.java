@@ -6,9 +6,11 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.os.Environment;
+
+import com.example.hardcattle.myapplication.MyApplication;
 
 import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -19,11 +21,27 @@ import java.io.IOException;
  * 描述：图片工具
  */
 public class ImageUtils {
-    public static int imgWidth = 960;
-    public static int imgHeight = 1280;
+    public static int imgWidth = 1080;
+    public static int imgHeight = 1920;
+    public static String mFileSaveImagePath = MyApplication.getInstances().getExternalCacheDir().getAbsolutePath() + "/images/";//压缩图片缓存目录
 
     /**
-     * 图片尺寸压缩
+     * 文件保存至应用缓存中
+     *
+     * @param originalPath
+     * @param fileName
+     */
+    public static String pictureSaveToCache(String originalPath, String fileName) {
+        BitmapFactory.Options opts = new BitmapFactory.Options();
+        opts.inSampleSize = 2;
+        Bitmap bitmap = BitmapFactory.decodeFile(originalPath, opts);//原始图片
+        String newFile = mFileSaveImagePath + fileName;
+        return compressBitmap2FileIn500K(bitmap, newFile);
+
+    }
+
+    /**
+     * 图片压缩
      *
      * @param path
      * @return
@@ -58,12 +76,12 @@ public class ImageUtils {
      * 将Bitmap对象 保存到本地
      * 需要读写内存卡的权限，否则会发生异常
      *
+     * @param context
      * @param mBitmap
-     * @param filePath 图片路径
-     * @param quality 图片质量  1---100
+     * @param filePath 图片路径  xxx/xxx/xx.jpg
      * @return
      */
-    public static String saveBitmap( Bitmap mBitmap, String filePath,int quality) {
+    public static String saveBitmap(Context context, Bitmap mBitmap, String filePath) {
         File filePic;
         try {
             filePic = new File(filePath);
@@ -72,7 +90,7 @@ public class ImageUtils {
                 filePic.createNewFile();
             }
             FileOutputStream fos = new FileOutputStream(filePic);
-            mBitmap.compress(Bitmap.CompressFormat.JPEG, quality, fos);
+            mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             fos.flush();
             fos.close();
         } catch (IOException e) {
@@ -87,15 +105,15 @@ public class ImageUtils {
     /**
      * 压缩bitmap,并保存到指定路径
      *
-     * @param quality  图片质量压缩比例
+     * @param options  压缩比例
      * @param bitmap
      * @param filePath
      * @return 保存的文件路径  “”表示保存失败
      */
-    public static String compressBitmapToFile(int quality, Bitmap bitmap, String filePath) {
+    public static String compressBitmapToFile(int options, Bitmap bitmap, String filePath) {
         // 0-100 100为不压缩
-        if (quality < 10) quality = 10;
-        if (quality > 100) quality = 100;
+        if (options < 10) options = 10;
+        if (options > 100) options = 100;
         try {
             File file = new File(filePath);
             if (file.exists()) {
@@ -106,13 +124,48 @@ public class ImageUtils {
 
             FileOutputStream fos = new FileOutputStream(file);
             // 把压缩后的数据存放到baos中
-            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, fos);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, options, fos);
             fos.flush();
             fos.close();
             return filePath;
         } catch (Exception e) {
             e.printStackTrace();
             return "";
+        }
+    }
+
+    /**
+     * 压缩图片至500K以内
+     *
+     * @param bitmap
+     * @param filePath
+     * @return
+     */
+    public static String compressBitmap2FileIn500K(Bitmap bitmap, String filePath) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+        int options = 100;
+        while (baos.toByteArray().length / 1024 > 500) { //循环判断如果压缩后图片是否大于100kb,大于继续压缩
+            baos.reset();//重置baos即清空baos
+            options -= 10;//每次都减少10
+            if (options < 0) options = 0;
+            bitmap.compress(Bitmap.CompressFormat.JPEG, options, baos);//这里压缩options%，把压缩后的数据存放到baos中
+            if (options == 0) break;
+        }
+        try {
+            File file = new File(filePath);
+            if (!file.exists()) {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+            }
+            FileOutputStream fos = new FileOutputStream(file);//将压缩后的图片保存的本地上指定路径中
+            fos.write(baos.toByteArray());
+            fos.flush();
+            fos.close();
+            return filePath;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
@@ -185,37 +238,5 @@ public class ImageUtils {
     public static int dp2px(Context context, float dp) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dp * scale + 0.5f);
-    }
-
-    /**
-     * 原图片路径 压缩处理至 自己的缓存目录
-     * @param sourcePath
-     * @return
-     */
-    public File imageCompress(String sourcePath) {
-        String newStr = "";
-        String fileUrl = "";
-
-        Bitmap bmp = null;
-        newStr = sourcePath.substring(sourcePath.lastIndexOf("/") + 1, sourcePath.lastIndexOf(".")) + System.currentTimeMillis();
-        fileUrl = CACHE_PATH+ newStr + ".JPEG";
-
-        try {
-            bmp = revitionImageSize(sourcePath);
-            saveBitmap(bmp, fileUrl,50);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return new File(fileUrl);
-    }
-
-    public static final String CACHE_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Cache/";
-    public static void makeFiles() {
-        File dirFirstFolder = new File(CACHE_PATH);
-        if (!dirFirstFolder.exists()) { //如果该文件夹不存在，则进行创建
-            dirFirstFolder.mkdirs();//创建文件夹
-            dirFirstFolder.setReadable(true);
-            dirFirstFolder.setWritable(true);
-        }
     }
 }

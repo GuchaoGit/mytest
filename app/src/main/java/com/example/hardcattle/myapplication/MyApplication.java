@@ -2,10 +2,8 @@ package com.example.hardcattle.myapplication;
 
 import android.Manifest;
 import android.app.Application;
-import android.widget.Toast;
 
 import com.blankj.utilcode.util.CrashUtils;
-import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.SDCardUtils;
 import com.blankj.utilcode.util.Utils;
 import com.mylhyl.acp.Acp;
@@ -20,13 +18,20 @@ import java.util.List;
  * 描述：
  */
 public class MyApplication extends Application {
+    //静态单例
+    public static MyApplication instances;
+
+    public static MyApplication getInstances() {
+        return instances;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
+        instances = this;
         Utils.init(this);
         checkPermissions();
     }
-
     private void checkPermissions() {
         Acp.getInstance(this).request(new AcpOptions.Builder()
                         .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE
