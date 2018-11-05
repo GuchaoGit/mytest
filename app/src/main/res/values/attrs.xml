@@ -29,4 +29,10 @@
         <enum name="circle" value="0" />
         <enum name="round" value="1" />
     </attr>
+
+    <declare-styleable name="SignNameView">
+        <attr name="lineWith" format="dimension" />
+        <attr name="backColor" format="dimension" />
+        <attr name="lineColor" format="dimension|color" />
+    </declare-styleable>
 </resources>

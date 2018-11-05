@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tvSlideMenu, tvAppName ,tvImageTest,testRefreshLayout,tvTestSwipeCardView;
     private DrawerLayout mDrawLayout;
     private NavigationView mNaviView;
-    private Button btnGsonTest, btnSortTest, btnScrollTableTest, btnTestScanCode, btnNfcTest, btnKeyBoardTest, btnNoticeTest, btnMapTest, btnSelectTest;
+    private Button btnGsonTest, btnSortTest, btnScrollTableTest, btnTestScanCode, btnNfcTest, btnKeyBoardTest, btnNoticeTest, btnMapTest, btnSelectTest, btnSignTest;
     private Banner mBanner;
     private List<ParcelableBean> userBeanList = new ArrayList<ParcelableBean>(){
         {
@@ -168,6 +168,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnKeyBoardTest = findViewById(R.id.btn_keyboard_test);
         btnNoticeTest = findViewById(R.id.btn_notice_test);
         btnMapTest = findViewById(R.id.btn_map_test);
+        btnSignTest = findViewById(R.id.btn_sign_test);
         btnSelectTest = findViewById(R.id.btn_select_test);
         autoCompleteView.setData("zylb");
 
@@ -187,6 +188,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnKeyBoardTest.setOnClickListener(this);
         btnNoticeTest.setOnClickListener(this);
         btnMapTest.setOnClickListener(this);
+        btnSignTest.setOnClickListener(this);
         btnSelectTest.setOnClickListener(this);
     }
 
@@ -268,6 +270,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 PopupWindowSelect popupWindowSelect = new PopupWindowSelect(this, btnSelectTest, data);
                 popupWindowSelect.showBelow();
+                break;
+
+            case R.id.btn_sign_test:
+                startActivity(new Intent(this, TestSignName.class));
                 break;
         }
     }

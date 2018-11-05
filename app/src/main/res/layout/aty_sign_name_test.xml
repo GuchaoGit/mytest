@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.example.hardcattle.widget.SignNameView
+        android:id="@+id/snv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/ll_bottom"
+        app:lineColor="#ff0099"
+        app:lineWith="@dimen/dimen_3dp" />
+
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onBtnClicked"
+            android:text="删除" />
+
+        <Button
+            android:id="@+id/btn_finish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onBtnClicked"
+            android:text="完成" />
+
+        <ImageView
+            android:id="@+id/iv_preview"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
+    </LinearLayout>
+
+
+</RelativeLayout>
