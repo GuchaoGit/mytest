@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private DrawerLayout mDrawLayout;
     private NavigationView mNaviView;
     private Button btnGsonTest, btnSortTest, btnScrollTableTest, btnTestScanCode, btnNfcTest, btnKeyBoardTest, btnNoticeTest, btnMapTest, btnSelectTest, btnSignTest;
+    private Button btnWindowPlayTest;
     private Banner mBanner;
     private List<ParcelableBean> userBeanList = new ArrayList<ParcelableBean>(){
         {
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
     };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,6 +169,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnNfcTest = findViewById(R.id.btn_nfc_test);
         btnKeyBoardTest = findViewById(R.id.btn_keyboard_test);
         btnNoticeTest = findViewById(R.id.btn_notice_test);
+        btnWindowPlayTest = findViewById(R.id.btn_window_play);
         btnMapTest = findViewById(R.id.btn_map_test);
         btnSignTest = findViewById(R.id.btn_sign_test);
         btnSelectTest = findViewById(R.id.btn_select_test);
@@ -189,6 +192,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnNoticeTest.setOnClickListener(this);
         btnMapTest.setOnClickListener(this);
         btnSignTest.setOnClickListener(this);
+        btnWindowPlayTest.setOnClickListener(this);
         btnSelectTest.setOnClickListener(this);
     }
 
@@ -274,6 +278,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btn_sign_test:
                 startActivity(new Intent(this, TestSignName.class));
+                break;
+            case R.id.btn_window_play://窗口化播放视频
+                startActivity(new Intent(this, TestVideoViewDialog.class));
                 break;
         }
     }
