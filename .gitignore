@@ -2,7 +2,7 @@
 build/
 local.properties
 *.iml
-.idea/
+/.idea/
 app/build/
-app/libs/
-app/src/main/res/drawable-xxhdpi/
+/local.properties
+/.idea/workspace.xml
