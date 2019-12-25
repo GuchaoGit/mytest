@@ -6,6 +6,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.hardcattle.myapplication.R;
 import com.lzy.imagepicker.loader.ImageLoader;
 
@@ -24,11 +25,13 @@ public class GlideImageLoader implements ImageLoader {
 
     @Override
     public void displayImage(Activity activity, String path, ImageView imageView, int width, int height) {
+        RequestOptions options = new RequestOptions();
+        options.placeholder(R.drawable.ic_default_image);
+        options.error(R.drawable.ic_default_image);
+        options.diskCacheStrategy(DiskCacheStrategy.ALL);
         Glide.with(activity)                             //配置上下文
                 .load(Uri.fromFile(new File(path)))      //设置图片路径(fix #8,文件名包含%符号 无法识别和显示)
-                .error(R.drawable.ic_default_image)           //设置错误图片
-                .placeholder(R.drawable.ic_default_image)     //设置占位图片
-                .diskCacheStrategy(DiskCacheStrategy.ALL)//缓存全尺寸
+                .apply(options)
                 .into(imageView);
     }
 
@@ -40,13 +43,12 @@ public class GlideImageLoader implements ImageLoader {
 //                    .diskCacheStrategy(DiskCacheStrategy.ALL)//缓存全尺寸
                     .into(imageView);
         } else {
-//            RequestOptions options = new RequestOptions();
-//            options.placeholder(R.mipmap.ic_place_pic);
-//            options.error(R.mipmap.ic_place_pic);
+            RequestOptions options = new RequestOptions();
+            options.placeholder(R.drawable.ic_default_image);
+            options.error(R.drawable.ic_default_image);
+            options.diskCacheStrategy(DiskCacheStrategy.ALL);
             Glide.with(activity).load(path)
-                    .error(R.drawable.ic_default_image)           //设置错误图片
-                    .placeholder(R.drawable.ic_default_image)     //设置占位图片
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)//缓存全尺寸
+                    .apply(options)
                     .into(imageView);
         }
     }
